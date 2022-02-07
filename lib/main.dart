@@ -1,67 +1,117 @@
 import 'package:flutter/material.dart';
+import 'second_page.dart';
+import 'container_page.dart';
+import 'image_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+//First StatefullWidget with the MaterialApp
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false, //disable Debug banner
+      home: MyScaffoldWidget(), //appel du 2eme StatefullWidget
+      routes: {
+        SecondPage.routeName: (_) => SecondPage(),
+        ContainerPage.routeName: (_) => ContainerPage(),
+        ImagePage.routeName: (_) => ImagePage(),
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+//Second StatefullWidget
+class MyScaffoldWidget extends StatefulWidget {
+  MyScaffoldWidget({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyScaffoldWidget> createState() => _MyScaffoldWidgetState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class _MyScaffoldWidgetState extends State<MyScaffoldWidget> {
+//Variables & function
+  bool myNewButton = false;
+  String myText = "Hello";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        centerTitle: true,
+        title: Text("My first Flutter project"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text("My first text in column"),
+          Text("My second text in column"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              RaisedButton(
+                onPressed: () {
+                  setState(() {
+                    //set State
+                    myNewButton = !myNewButton;
+                  });
+                },
+                child: Text("RaisedButton"),
+              ),
+              Text(myNewButton ? "Hi" : myText), //ternaire
+              Text(myNewButton ? myText : "Hòla"),
+            ],
+          )
+        ],
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.blue,
+        child: Row(
+          children: [
+            Spacer(),
+            IconButton(
+              icon: Icon(Icons.home, color: Colors.white),
+              onPressed: () {
+                print("Button pressed");
+              },
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Spacer(),
+            IconButton(
+              icon:
+                  Icon(Icons.confirmation_number_outlined, color: Colors.white),
+              onPressed: () {
+                Navigator.of(context).pushNamed(SecondPage.routeName);
+              },
             ),
+            Spacer(),
+            IconButton(
+              icon: Icon(Icons.next_plan_sharp, color: Colors.white),
+              onPressed: () {
+                Navigator.of(context).pushNamed(ImagePage.routeName);
+              },
+            ),
+            Spacer(),
+            IconButton(
+              icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+              onPressed: () {
+                Navigator.of(context).pushNamed(ContainerPage.routeName);
+              },
+            ),
+            Spacer(),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
 }
+// onPressed:() {
+// Navigator.of(context).pushNamed(SecondPage.routeName);
+// },
