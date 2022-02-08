@@ -9,6 +9,7 @@ class TextFormPage extends StatefulWidget {
 
 //déclaration du champ de texte
 TextEditingController _controller = TextEditingController();
+String userInput = "Nothing";
 
 class _TextFormPageState extends State<TextFormPage> {
   @override
@@ -23,10 +24,22 @@ class _TextFormPageState extends State<TextFormPage> {
             controller: _controller, //appel du controller
           ),
           MaterialButton(
-            onPressed: () {},
-            child: Text("Display value"),
+            onPressed: () {
+              setState(() {
+                userInput = _controller.text;
+              });
+            },
+            child: Text(
+              "Display value",
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           )
         ],
+        // TODO display input
       ),
     );
   }
