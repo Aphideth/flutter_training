@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'second_page.dart';
 import 'container_page.dart';
 import 'image_page.dart';
+import 'listview_page.dart';
+import 'listviewBuilder.dart';
+import 'expanded_page.dart';
+import 'textForm_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,6 +27,10 @@ class _MyAppState extends State<MyApp> {
         SecondPage.routeName: (_) => SecondPage(),
         ContainerPage.routeName: (_) => ContainerPage(),
         ImagePage.routeName: (_) => ImagePage(),
+        ListViewPage.routeName: (_) => ListViewPage(),
+        ListViewBuilderPage.routeName: (_) => ListViewBuilderPage(),
+        ExpandedPage.routeName: (_) => ExpandedPage(),
+        TextFormPage.routeName: (_) => TextFormPage(),
       },
     );
   }
@@ -54,10 +62,34 @@ class _MyScaffoldWidgetState extends State<MyScaffoldWidget> {
         children: [
           Text("My first text in column"),
           Text("My second text in column"),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(ListViewPage.routeName);
+            },
+            child: Text("Go to LisView Page"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(ListViewBuilderPage.routeName);
+            },
+            child: Text("Go to LisViewBuilder Page"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(ExpandedPage.routeName);
+            },
+            child: Text("Go to Expanded Page"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(TextFormPage.routeName);
+            },
+            child: Text("Go to Text Form Page"),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   setState(() {
                     //set State
@@ -100,7 +132,7 @@ class _MyScaffoldWidgetState extends State<MyScaffoldWidget> {
             ),
             Spacer(),
             IconButton(
-              icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+              icon: Icon(Icons.arrow_drop_down_circle, color: Colors.white),
               onPressed: () {
                 Navigator.of(context).pushNamed(ContainerPage.routeName);
               },
@@ -112,6 +144,3 @@ class _MyScaffoldWidgetState extends State<MyScaffoldWidget> {
     );
   }
 }
-// onPressed:() {
-// Navigator.of(context).pushNamed(SecondPage.routeName);
-// },

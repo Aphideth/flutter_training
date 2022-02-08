@@ -8,6 +8,7 @@ class SecondPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Second Page"),
       ),
+      body: Center(child: Text("Center Widget")),
     );
   }
 }

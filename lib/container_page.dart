@@ -13,13 +13,25 @@ class _ContainerPageState extends State<ContainerPage> {
       appBar: AppBar(
         title: Text("Container Page"),
       ),
-      body: Container(
-        padding: EdgeInsets.all(10),
-        margin: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: Colors.pink,
-        ),
-        child: Text("Random text"),
+      body: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(100),
+            margin: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.pink,
+            ),
+            child: Text("Random text"),
+          ),
+          Container(
+            padding: EdgeInsets.all(20),
+            margin: EdgeInsets.all(100),
+            decoration: BoxDecoration(
+              color: Colors.grey,
+            ),
+            child: Text("Some text"),
+          ),
+        ],
       ),
     );
   }

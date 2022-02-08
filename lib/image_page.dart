@@ -6,13 +6,14 @@ class ImagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Container Page"),
+        title: Text("Image Page"),
       ),
       body: SingleChildScrollView(
         child: Column(children: [
           Image.network("https://picsum.photos/200"),
           Image.asset("images/linkedin.png"),
           Image.network("https://picsum.photos/300"),
+          Image.network("https://placedog.net/500"),
         ]),
       ),
     );
